@@ -1,0 +1,35 @@
+{
+    "crop": {
+        "how to grow maize": "Plough, plant certified seeds, fertilize properly."
+    },
+    "weather": {
+        "is rain expected": "Rain is likely in the coming week."
+    },
+    "pests": {
+        "how to control aphids": "Use neem oil or insecticidal soap."
+    },
+    "diseases": {
+        "how to treat leaf blight": "Apply fungicide and remove infected leaves."
+    },
+    "soil": {
+        "how to improve soil fertility": "Add organic matter and crop rotation."
+    },
+    "irrigation": {
+        "how to set up drip irrigation": "Install drip lines and connect to a water source."
+    },
+    "fertilizers": {
+        "what is the best fertilizer for maize": "Use NPK 20-10-10 for maize."
+    },
+    "equipment": {
+        "how to maintain a tractor": "Regularly check oil levels, clean filters, and service annually."
+    },
+    "harvesting": {
+        "when to harvest maize": "Harvest when kernels are hard and moisture content is around  20%."
+    },
+    "market": {
+        "where to sell maize": "Local markets, cooperatives, or online platforms."
+    },
+    "general": {
+        "what is farmwise": "Farmwise is a platform for farmers to manage their crops and get advice."
+    }
+}
