@@ -1,15 +1,24 @@
 import { Link } from "react-router-dom";
+import AgroAI from '../assets/img/agroailogo.png'
 
 const Header = () => {
   return (
     <>
-      <header id="header" className="header d-flex align-items-center position-relative pt-0 mt-0">
+      <header
+        id="header"
+        className="header d-flex align-items-center position-fixed top-0 start-0 w-100 bg-white shadow"
+        style={{ zIndex: 1030, height: '80px' }}
+      >
         <div className="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-          <a href="index.html" className="logo d-flex align-items-center">
-            {/* Uncomment the line below if you also wish to use an image logo */}
-            <img src="assets/img/logo.png" alt="AgriCulture"></img>
-            {/* <h1 className="sitename">AgriCulture</h1> */}
+          <a href="/" className="logo d-flex align-items-center">
+            <img
+              src={AgroAI}
+              alt="AgriCulture"
+              className="img-fluid rounded-5 me-2"
+              style={{ height: '60px', width: '60px' }}
+            />
+            {/* <h1 className="sitename mb-0 fs-5 fw-bold text-dark">AgriCulture</h1> */}
           </a>
 
           <nav id="navmenu" className="navmenu">

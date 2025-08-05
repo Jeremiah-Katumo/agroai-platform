@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Bar } from 'recharts';
 
 const YieldBarChart = ({ data }: { data }) => ( // {data: any[]}
-    <Card className="d-flex flex-column gap-5 align-items-center justify-content-center p-6 top-50 rounded-3">
+    <Card className="d-flex flex-column gap-5 align-items-center justify-content-center pb-4 pt-4 top-50 rounded-3">
         <CardHeader>
             <CardTitle>Yield Predictions vs Actual Results</CardTitle>
             <CardDescription>Comparison of predicted and actual crop yields</CardDescription>
