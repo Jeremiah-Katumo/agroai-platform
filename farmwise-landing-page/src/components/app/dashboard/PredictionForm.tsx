@@ -17,9 +17,9 @@ interface Props {
 }
 
 const PredictionForm: React.FC<Props> = ({ formData, loading, onChange, onSubmit }) => (
-    <div className="bg-white rounded-lg shadow-lg p-6">
+    <div className="bg-white rounded-4 shadow-lg p-6 gap-4 pt-4 pb-4">
         <h2 className="text-xl font-semibold text-gray-800 mb-4">Anomaly Prediction</h2>
-        <div className="space-y-4">
+        <div className="space-y-4 gap-3 d-flex flex-column justify-content-center align-items-center">
             {(Object.keys(formData) as (keyof PredictionFormData)[]).map((key) => (
                 <div key={key}>
                     <label className="block text-sm font-medium text-gray-700 capitalize">

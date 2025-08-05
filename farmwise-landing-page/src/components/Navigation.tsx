@@ -9,6 +9,7 @@ const Navigation: React.FC = () => {
     { label: 'Dashboard', href: '/dashboard' },
     { label: 'Yield', href: '/yield' },
     { label: 'Pest', href: '/pest' },
+    { label: 'Disease', href: '/disease' },
     { label: 'Upload', href: '/upload' },
     { label: 'Bot', href: '/bot' },
   ];

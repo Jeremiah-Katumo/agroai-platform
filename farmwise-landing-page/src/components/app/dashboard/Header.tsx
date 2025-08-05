@@ -7,11 +7,11 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ onAddSample }) => (
-    <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+    <div className="bg-white rounded-5 shadow-lg pt-4 pb-4 mb-6">
         <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 mt-4">
                 <Activity className="h-8 w-8 text-blue-600" />
-                <h1 className="text-3xl font-bold text-gray-800">Sensor Data Dashboard</h1>
+                <h1 className="text-success text-3xl font-bold text-gray-800">Sensor Data Dashboard</h1>
             </div>
             <button
                 onClick={onAddSample}

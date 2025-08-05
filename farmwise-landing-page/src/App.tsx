@@ -10,15 +10,16 @@ import YieldPredictor from "./pages/YieldPredictor";
 import PestPredictor from "./pages/PestPredictor";
 import UploadCSV from "./pages/UploadCSV";
 import BotTabs from "./pages/BotTabs";
-import SensorDashboard from "./components/app/dashboard/SensorDashboard";
+import SensorDashboard from "./components/app/SensorDashboard";
 import './App.css';
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Main from './components/Main';
 import Footer from './components/Footer';
 import Header from './components/Header';
-import YieldDashboard from './pages/YieldDashboard';
-import PestDashboard from './pages/PestDashboard';
+import YieldDashboard from './components/app/YieldDashboard';
+import PestDashboard from './components/app/PestDashboard';
+import CropDiseaseDashboard from './components/app/DiseaseDashboard';
 
 
 const queryClient = new QueryClient();
@@ -33,8 +34,9 @@ const App = () => {
     <>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <BrowserRouter>
-            <div className="App">
+
+          <div id='App' className="App container-fluid px-0 d-flex flex-column min-vh-100">
+            <BrowserRouter>
               <Toaster />
               <Sonner />
               <Header />
@@ -44,6 +46,7 @@ const App = () => {
                 <Route path="/dashboard" element={<SensorDashboard />} />
                 <Route path='/yields-dashboard' element={<YieldDashboard />} />
                 <Route path='/pests-dashboard' element={<PestDashboard />} />
+                <Route path='/diseases-dashboard' element={<CropDiseaseDashboard />} />
                 <Route path="/yield-prediction" element={<YieldPredictor />} />
                 <Route path="/pest-prediction" element={<PestPredictor />} />
                 <Route path="/upload" element={<UploadCSV />} />
@@ -51,8 +54,9 @@ const App = () => {
                 <Route path="*" element={<NotFound />} />
               </Routes>
               <Footer />
-            </div>
-          </BrowserRouter>
+            </BrowserRouter>
+          </div>
+
         </TooltipProvider>
       </QueryClientProvider>
     </>

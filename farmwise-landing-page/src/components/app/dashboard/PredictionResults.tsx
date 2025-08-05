@@ -22,12 +22,12 @@ interface Props {
 }
 
 const PredictionResults: React.FC<Props> = ({ prediction, modelStatus }) => (
-    <div className="bg-white rounded-lg shadow-lg p-6">
+    <div className="bg-white rounded-4 shadow-lg pt-4 pb-4">
         <h2 className="text-xl font-semibold text-gray-800 mb-4">Prediction Results</h2>
 
         {prediction && (
             <div className="space-y-4">
-                <div className={`p-4 rounded-lg ${prediction.is_anomaly ? 'bg-red-50 border-red-200' : 'bg-green-50 border-green-200'} border`}>
+                <div className={`p-4 rounded-4 ${prediction.is_anomaly ? 'bg-red-50 border-red-200' : 'bg-green-50 border-green-200'} border`}>
                     <div className="flex items-center space-x-2">
                         {prediction.is_anomaly ? (
                             <AlertTriangle className="h-5 w-5 text-red-600" />

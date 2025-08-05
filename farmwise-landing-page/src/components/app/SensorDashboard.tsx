@@ -1,10 +1,12 @@
 // components/SensorDashboard/index.tsx
 import React, { useState, useEffect } from 'react';
-import Header from './Header';
-import AnalyticsCards from './AnalyticsCards';
-import Charts from './Charts';
-import PredictionForm, { PredictionFormData } from './PredictionForm';
-import PredictionResults from './PredictionResults';
+import Header from './dashboard/Header';
+import AnalyticsCards from './dashboard/AnalyticsCards';
+import Charts from './dashboard/Charts';
+import PredictionForm, { PredictionFormData } from './dashboard/PredictionForm';
+import PredictionResults from './dashboard/PredictionResults';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const API_BASE_URL = import.meta.env.REACT_APP_API_BASE_URL;
 
@@ -65,60 +67,62 @@ const SensorDashboard: React.FC = () => {
     });
 
     useEffect(() => {
-        fetchSensorData();
-        fetchAnalytics();
-        fetchModelStatus();
+        loadDashboardData();
     }, []);
+
+    const loadDashboardData = async () => {
+        await Promise.all([fetchSensorData(), fetchAnalytics(), fetchModelStatus()]);
+    };
 
     const fetchSensorData = async () => {
         try {
-            const res = await fetch(`${API_BASE_URL}/sensors/readings?limit=50`);
-            const data = await res.json();
+            const response = await fetch(`${API_BASE_URL}/sensors/readings?limit=50`);
+            const data = await response.json();
             setSensorData(data);
-        } catch (err) {
-            console.error('Error fetching sensor data:', err);
+        } catch (error) {
+            console.error('Error fetching sensor data:', error);
         }
     };
 
     const fetchAnalytics = async () => {
         try {
-            const res = await fetch(`${API_BASE_URL}/sensors/analytics`);
-            const data = await res.json();
+            const response = await fetch(`${API_BASE_URL}/sensors/analytics`);
+            const data = await response.json();
             setAnalytics(data);
-        } catch (err) {
-            console.error('Error fetching analytics:', err);
+        } catch (error) {
+            console.error('Error fetching analytics:', error);
         }
     };
 
     const fetchModelStatus = async () => {
         try {
-            const res = await fetch(`${API_BASE_URL}/model/status`);
-            const data = await res.json();
+            const response = await fetch(`${API_BASE_URL}/model/status`);
+            const data = await response.json();
             setModelStatus(data);
-        } catch (err) {
-            console.error('Error fetching model status:', err);
+        } catch (error) {
+            console.error('Error fetching model status:', error);
         }
     };
 
     const handlePrediction = async () => {
         setLoading(true);
         try {
-            const res = await fetch(`${API_BASE_URL}/predict/anomaly`, {
+            const response = await fetch(`${API_BASE_URL}/predict/anomaly`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(predictionForm),
             });
-            const data = await res.json();
+            const data = await response.json();
             setPrediction(data);
-        } catch (err) {
-            console.error('Error predicting anomaly:', err);
+        } catch (error) {
+            console.error('Error predicting anomaly:', error);
         } finally {
             setLoading(false);
         }
     };
 
     const addSampleReading = async () => {
-        const sample: SensorReading = {
+        const sampleReading: SensorReading = {
             timestamp: new Date().toISOString(),
             sensor_id: `sensor_${Math.floor(Math.random() * 10)}`,
             temperature: 20 + Math.random() * 10,
@@ -133,43 +137,55 @@ const SensorDashboard: React.FC = () => {
             await fetch(`${API_BASE_URL}/sensors/readings`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(sample),
+                body: JSON.stringify(sampleReading),
             });
-            fetchSensorData();
-            fetchAnalytics();
-        } catch (err) {
-            console.error('Error adding sample reading:', err);
+            await Promise.all([fetchSensorData(), fetchAnalytics()]);
+        } catch (error) {
+            console.error('Error adding sample reading:', error);
         }
     };
 
     const handleFormChange = (field: keyof PredictionFormData, value: number) => {
-        setPredictionForm(prev => ({ ...prev, [field]: value }));
+        setPredictionForm(prev => ({
+            ...prev,
+            [field]: value
+        }));
     };
 
     const chartData: ChartDataPoint[] = sensorData.map((reading, index) => ({
         index,
         temperature: reading.temperature,
         humidity: reading.humidity,
-        pressure: reading.pressure / 10,
-        vibration: reading.vibration * 100,
+        pressure: reading.pressure / 10, // normalize
+        vibration: reading.vibration * 100, // amplify
         power: reading.power_consumption,
         status: reading.status === 'anomaly' ? 1 : 0
     }));
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6">
-            <div className="max-w-7xl mx-auto p-4">
-                <Header onAddSample={addSampleReading} />
+        <div id="sensor-dashboard" className="min-vh-100 bg-light bg-gradient p-4">
+            <div className="container py-3">
+                <Header onAddSample={addSampleReading} /> <hr/>
+
                 {analytics && <AnalyticsCards analytics={analytics} />}
+
                 <Charts data={chartData} />
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <PredictionForm
-                        formData={predictionForm}
-                        loading={loading}
-                        onChange={handleFormChange}
-                        onSubmit={handlePrediction}
-                    />
-                    <PredictionResults prediction={prediction} modelStatus={modelStatus} />
+
+                <div className="row g-4 mt-4">
+                    <div className="col-12 col-lg-6">
+                        <PredictionForm
+                            formData={predictionForm}
+                            loading={loading}
+                            onChange={handleFormChange}
+                            onSubmit={handlePrediction}
+                        />
+                    </div>
+                    <div className="col-12 col-lg-6">
+                        <PredictionResults
+                            prediction={prediction}
+                            modelStatus={modelStatus}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

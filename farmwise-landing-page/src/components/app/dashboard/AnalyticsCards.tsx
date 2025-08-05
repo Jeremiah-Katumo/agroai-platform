@@ -14,7 +14,7 @@ interface Props {
 }
 
 const AnalyticsCards: React.FC<Props> = ({ analytics }) => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6 rounded-4">
         <Card label="Total Readings" value={analytics.total_readings} icon={<Database />} color="blue" />
         <Card label="Avg Temperature" value={`${analytics.average_temperature.toFixed(1)}°C`} icon={<Thermometer />} color="green" />
         <Card label="Avg Humidity" value={`${analytics.average_humidity.toFixed(1)}%`} icon={<TrendingUp />} color="purple" />
@@ -33,7 +33,7 @@ const Card = ({
     icon: JSX.Element;
     color: string;
 }) => (
-    <div className="bg-white rounded-lg shadow-lg p-6">
+    <div className="bg-white rounded-lg shadow-lg p-6 rounded-4">
         <div className="flex items-center justify-between">
             <div>
                 <p className="text-sm text-gray-600">{label}</p>

@@ -20,8 +20,8 @@ interface Props {
 }
 
 const Charts: React.FC<Props> = ({ data }) => (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <div className="bg-white rounded-lg shadow-lg p-6">
+    <div className="d-flex flex-column gap-4">
+        <div className="bg-white rounded-lg shadow-lg pt-4 pb-4">
             <h2 className="text-xl font-semibold text-gray-800 mb-4">Sensor Readings Over Time</h2>
             <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={data}>
@@ -36,7 +36,7 @@ const Charts: React.FC<Props> = ({ data }) => (
             </ResponsiveContainer>
         </div>
 
-        <div className="bg-white rounded-lg shadow-lg p-6">
+        <div className="bg-white rounded-lg shadow-lg pt-4 pb-4">
             <h2 className="text-xl font-semibold text-gray-800 mb-4">Anomaly Detection</h2>
             <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={data}>
